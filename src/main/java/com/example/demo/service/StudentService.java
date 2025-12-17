@@ -28,7 +28,7 @@ public class Studentcontroller {
         return src.retdata();
     }
 
-    // @GetMapping("/getid/{id}")
+    // @GetMapping("/g etid/{id}")
     // public Studententity getIdValue(@PathVariable int id){
     //     return src.retIdvalue(id);
     // }

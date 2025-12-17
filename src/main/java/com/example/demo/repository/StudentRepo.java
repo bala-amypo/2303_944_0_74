@@ -1,1 +1,3 @@
-public interface StudentRepo extends jpaRepository<
+public interface StudentRepo extends JpaRepository<Student,Long>{
+    
+}

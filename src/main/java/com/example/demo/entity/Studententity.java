@@ -1,43 +1,81 @@
-package com.example.project.entity;
+package com.example.demo.entity;
 
-import java.time.LocalDate;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
+@Entity
+@Table(name = "student")
 public class Studententity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank(message = "name cannot be blank")
+    @Column(unique = true, nullable = false)
     private String name;
-    private int id;
-    private LocalDate date;
-    private float cgpa;
+
+    @NotBlank(message = "email cannot be blank")
+    @Email(message = "invalid format")
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    private String role;
+
+   
+    public Studententity() {
+    }
+
+    
+    public Studententity(Long id, String name, String email, String password, String role) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
-    public int getId() {
-        return id;
+
+    public String getEmail() {
+        return email;
     }
-    public void setId(int id) {
-        this.id = id;
+
+    public void setEmail(String email) {
+        this.email = email;
     }
-    public LocalDate getDate() {
-        return date;
-    }
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-    public float getCgpa() {
-        return cgpa;
-    }
-    public void setCgpa(float cgpa) {
-        this.cgpa = cgpa;
-    }
-    public Studententity(String name, int id, LocalDate date, float cgpa) {
-        this.name = name;
-        this.id = id;
-        this.date = date;
-        this.cgpa = cgpa;
-    }
-    public Studententity() {
+
+    public String getPassword() {
+        return password;
     }
     
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+    
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

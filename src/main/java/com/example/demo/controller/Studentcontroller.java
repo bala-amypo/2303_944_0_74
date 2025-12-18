@@ -1,43 +1,47 @@
-package com.example.project.controller;
+package com.example.demo.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.example.project.entity.Studententity;
-import com.example.project.service.Studentservice;
+import com.example.demo.entity.Studententity;
+import com.example.demo.service.Studentservices;
 
 @RestController
+@RequestMapping("/api/students")
 public class Studentcontroller {
-    @Autowired
-    Studentservice src;
+
+    private final Studentservices src;
+
+   
+    public Studentcontroller(Studentservices src) {
+        this.src = src;
+    }
+
     @PostMapping("/post")
-    public Studententity postdata(@RequestBody Studententity st ){
-        return src.savedata(st);
+    public Studententity insertData(@RequestBody Studententity st) {
+        return src.postdata(st);
     }
+
     @GetMapping("/get")
-    public List<Studententity> getdata(){
-        return src.retdata();
+    public List<Studententity> wantData() {
+        return src.getdata();
     }
+
     @GetMapping("/getid/{id}")
-    public Studententity getIdVal(@PathVariable int id){
-        return src.id(id);
-        
+    public Studententity particularData(@PathVariable Long id) {
+        return src.getIdValue(id);
     }
-    @PutMapping("/update/{id}")
-    public Studententity putdata(@PathVariable int id,@RequestBody Studententity st){
-        return src.retputdata(id,st);
+
+    @PutMapping("/{id}")
+    public Studententity updateData(@PathVariable Long id,
+                                    @RequestBody Studententity st) {
+        return src.update(id, st);
     }
-    
-    @DeleteMapping("/delete/{id}")
-        public Studententity deletedata(@PathVariable int id){
-            return src.retdeldata(id);
-        }
-    }
+
+    @DeleteMapping("/{id}")
+    public void deleteData(@PathVariable Long id) {
+    src.delete(id);   
+
+}
+}
